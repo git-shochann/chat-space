@@ -1,8 +1,8 @@
 # Chat-Space DB設計!!!
 
- ## usersテーブル!
-|------|----|-------|
+## usersテーブル!
 |Column|Type|Options|
+|------|----|-------|
 |name|string|null: false|
 |email|string|null: false|
 |password|string|null: false|
@@ -13,8 +13,8 @@
 
 
 ## groupsテーブル!
-|------|----|-------|
 |Column|Type|Options|
+|------|----|-------|
 |title|text|null :false|
 ### アソシエーション
 - has_many :chats
