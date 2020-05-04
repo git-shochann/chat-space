@@ -8,6 +8,7 @@
 |password|string|null: false|
 ### アソシエーション
 - has_many :chats
+- has_many :groups_users
 - has_many :groups, through: :groups_users
 
 
@@ -15,9 +16,10 @@
 ## groupsテーブル!
 |Column|Type|Options|
 |------|----|-------|
-|title|text|null :false|
+|title|string|null :false|
 ### アソシエーション
 - has_many :chats
+- has_many :groups_users
 - has_many :users, through: :groups_users
 
 
@@ -25,7 +27,7 @@
 ## chatsテーブル!
 |Column|Type|Options|
 |------|----|-------|
-|text|text|null :false|
+|text|text||
 |photo|text||
 user_id|string|null: false, foreign: true|
 group_id|string|null: false, foreign: true|
