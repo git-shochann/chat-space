@@ -1,0 +1,25 @@
+.side-bar
+  .side-bar__header
+    .side-bar__header__box
+      %p.side-bar__header__box__name
+        Sho Tsuboya
+      %ul.side-bar__header__box__option
+        %li.side-bar__header__box__option__new-group 
+          = link_to "#" do
+            = icon('far' , 'edit' , class: 'icon')
+        %li.side-bar__header__box__option__edit-user
+          = link_to "#" do
+            = icon('fas' , 'cog' , class: 'icon')
+  .side-bar__group-list 
+    .side-bar__group-list__group
+      %p.side-bar__group-list__group__name
+        TEST
+      %p.side-bar__group-list__group__message
+        まだメッセージがありません
+    .side-bar__group-list__group
+      %p.side-bar__group-list__group__name
+        aaaa
+      %p.side-bar__group-list__group__message
+        まだメッセージがありません
+
+//部分テンプレートのサイドバーファイル！
