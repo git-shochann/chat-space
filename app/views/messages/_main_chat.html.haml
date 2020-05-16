@@ -1,17 +1,31 @@
 .main-chat
   .main-chat__group-info
     .main-chat__group-info__left-box
-      %h1.main-chat__group-info__title-box
-      グループ名
-      %main-chat__group-info__member-name
+      %h1.main-chat__group-info__left-box__title-box
+        Programming
+      %ul.main-chat__group-info__left-box__member-name
+        Member : Sho
 
     .main-chat__group-info__right-box
-
-
+      = link_to "Edit", "#"
 
   .main-chat__message
-
-
+    .main-chat__message__box
+      .main-chat__message__box__info
+        %p.main-chat__message__box__info__talker
+          Sho
+        %p.main-chat__message__box__info__date
+          2020/08/25(Wed)17:43:00
+      .main-chat__message__box__comment
+        Good Morning!
+    .main-chat__message__box
+      .main-chat__message__box__info
+        %p.main-chat__message__box__info__talker
+          Sho
+        %p.main-chat__message__box__info__date
+          2020/08/25(Wed)17:45:00
+      .main-chat__message__box__comment
+        Good Night!
 
 
   .main-chat__form
