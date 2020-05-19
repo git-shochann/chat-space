@@ -1,12 +1,12 @@
 .main-chat {
   background-color: #ffffff;
-  width: calc(100vw - 300px);
-  height: 100px;
-  float: left;  //ボックスモデルの概念を思い出して。浮かせてる。
+  height: 100vh;                              // カリキュラムと音声確認。
+  width: calc(100% - 300px);
+  float: left;                                // ボックスモデルの概念を思い出す。浮かせてる。
+
   &__group-info {
     background-color: #ffffff;
-    width: calc(100vw - 300px);
-    // height: 100px;    // 親要素で決めてあるので必要なし。
+    height: 100px;
     padding: 0 40px;
     display: flex;
     justify-content: space-between;
@@ -29,20 +29,17 @@
     line-height: 40px;
     border: 1px solid #38aef0;
     margin-top: 28px;
-    
     }
-    
-
     a {
     text-decoration: none;
     font-size: 16px;
     color: #38aef0;
     }
   }
+
   &__message {
     background-color: #fafafa;
     height: calc(100vh - 190px);
-    width: calc(100vw - 300px);
     padding: 35px 40px;
     &__box {
     margin-bottom: 46px;
@@ -66,9 +63,49 @@
       }
     }
   }
-  &__form {
-    background-color: #d2d2d2;
-    height: 90px;
-    width: calc(100vw - 300px);
+
+  &__form {                                   // フォーム全体の要素--div要素
+  background-color:#ddd;
+  padding: 20px 40px;
+  display: flex;
+  height: 90px;
+    &__new-message {                          // send含むフォーム部分の親要素--form要素
+      display: flex;
+      width:100%;
+      &__input-box {                          // type a messageの箱と画像アイコンが乗っている箱--div要素
+      position: relative;
+      width:100%;
+        &__text {                             // type a message の箱--input要素
+        padding: 0 40px 0 10px;               // POINT! type a messageの左に10px,文字を長く入力した時画像アイコンが突き抜けないように予め右にpadding 40pxを取っておく。
+        height: 50px;
+        width:100%;
+        border-style: none;
+        }
+        &__image {                            // 画像アイコンが乗ってる箱--label要素 ここの部分は要注意。上記の&__textの上に重ねてる。&__textではwidth100%を取っている。わざとpaddingで回避。なのでpositionを使う必要性がある。
+        position: absolute;
+        top:10px;
+        right:0;
+        margin-right: 10px;
+        font-size: 1.3rem;
+        cursor: pointer;
+          &__detail {
+          display: none;                      // 画像アイコンとinputでtype:"file"で被せてる部分--input要素
+          }
+        }
+      }
+      &__submit-btn {                         // Sendのボタン--input要素
+      margin-left: 15px;
+      padding: 0 30px;
+      width: 100px;
+      height: 50px;
+      background-color: #38aef0;
+      color: #ffffff;
+      }
+    }
+
   }
 }
+
+// MEMO //
+// heightはmain-chat（右部分の全体）で100vh指定。それ以外の3つの部分に関してはpx指定で高さを設定。
+// widthはmain-chat（右部分の全体）で100%-300pxを設定。それで決まっているので以後3つの部分に関してはwidthの指定なし。

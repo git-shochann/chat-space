@@ -29,6 +29,16 @@
 
 
   .main-chat__form
+    %form.main-chat__form__new-message
+      .main-chat__form__new-message__input-box
+        %input{type: "text" , placeholder: "type a message" , class: "main-chat__form__new-message__input-box__text"}
+        %label.main-chat__form__new-message__input-box__image
+          %input{type: "file" , class: "main-chat__form__new-message__input-box__image__detail"}
+          = icon('far' , 'image')
+      %input{type: "submit" , value: "Send" , class: "main-chat__form__new-message__submit-btn"}
 
 
-//メインチャットの部分テンプレートのファイル！
+
+// MEMO //
+// 36,37インデント揃える。Sampleの検証で見てもインデント揃ってる。
+// メインチャットの部分テンプレートのファイル！

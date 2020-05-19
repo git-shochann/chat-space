@@ -2,13 +2,13 @@
   background-color: #253141;
   width: 300px;
   height: 100vh;
-  float: left;  //ボックスモデルの概念を思い出して。浮かせてる。
+  float: left;                        // ボックスモデルの概念を思い出して。浮かせてる。
   color: #ffffff;
+
   &__header {
     background-color: #253141;
-    width: 300px;
     height: 100px;
-    padding: 0 20px;  //上下は0で余白取らない。左右は20pxずつ余白をとる。
+    padding: 0 20px;
     display: flex;
     align-items: center;
     &__box {
@@ -16,7 +16,6 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
-    
       &__name {
       line-height: 20px;
       }
@@ -26,7 +25,6 @@
       justify-content: flex-end
       }
         &__option__new-group {
-
         }
         &__option__edit-user {
         margin-left: 5px;
@@ -34,16 +32,14 @@
       .icon {
         color: #ffffff;
       }
-
-
     }
   }
+
   &__group-list {
     background-color: #2f3e51;
-    width: 300px;
     height: calc(100vh - 100px);
-    padding: 20px;                   // サイドバーメイン全体にPaddingをかける.
-    &__group {                       // TESTとまだメッセージはありませんの親の箱.
+    padding: 20px;                   // サイドバーメイン全体にPaddingをかける
+    &__group {                       // TESTとまだメッセージはありませんの親の箱
     margin-bottom: 40px;
       &__name{                       // TESTの小さな箱
       font-size: 15px;
