@@ -1,0 +1,28 @@
+.side-bar
+  .side-bar__header
+    .side-bar__header__box
+      %p.side-bar__header__box__name
+        Sho
+      %ul.side-bar__header__box__option
+        %li.side-bar__header__box__option__new-group 
+          = link_to "#" do
+            = icon('far' , 'edit' , class: 'icon')      #特殊な書き方? #{}と()使って書く方法二通りあるよね？ 5/18聞く。
+        %li.side-bar__header__box__option__edit-user
+          = link_to "#" do
+            = icon('fas' , 'cog' , class: 'icon')       #特殊な書き方? #{}と()使って書く方法二通りあるよね？
+  .side-bar__group-list 
+    .side-bar__group-list__group
+      %p.side-bar__group-list__group__name
+        Programming
+      %p.side-bar__group-list__group__message
+        まだメッセージがありません
+    .side-bar__group-list__group
+      %p.side-bar__group-list__group__name
+        Rails
+      %p.side-bar__group-list__group__message
+        まだメッセージがありません
+
+
+
+// MEMO //
+// 部分テンプレートであるサイドバーファイル！
