@@ -7,4 +7,14 @@
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   %body
+    = render 'layouts/notifications'
     = yield
+
+// このファイル「application.html.haml」は親分、''''''どのビューを表示するときも必ず表示されるようデフォルトで設定されているファイル'''''
+
+// 11行目の「yield」は色々ある子分ファイル.html.erbを持ってくる。
+
+
+// 例えば、コントローラーのindexアクションが実行され、「index.html.haml」が表示される場面を考えます。
+// まず、「application.html」に書かれた内容は全て表示されます。その上で、yieldの部分に「index.html」の内容が埋め込まれ表示されます。
+// よって、10行目に記載したindexのビューの上部にフラッシュメッセージが表示される!!
