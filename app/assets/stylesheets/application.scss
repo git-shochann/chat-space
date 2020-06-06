@@ -1,9 +1,17 @@
 @import "reset";
+@import "config/colors";         // colors.scssをここに書く理由 => colors.scssは、他のscssで利用している色についての変数が定義されている。なので、色についての変数を利用するCSSの前に先に読み込めていないと、エラーになる!!!
 @import "modules/messages";
 @import "font-awesome-sprockets";
 @import "font-awesome";
 @import "modules/main-chat";
 @import "modules/side-bar";
+@import "modules/user";
+@import "modules/flash";
 
 
 // 機能毎に書いたパーシャルファイルを集結させてる //
+
+// .scssの記載は必要なし!! //
+
+// @importでファイルを読み込む順番も理解しなくてはいけない //
+
