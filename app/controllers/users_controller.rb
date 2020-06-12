@@ -6,9 +6,9 @@ class UsersController < ApplicationController
   def update
 
     if current_user.update(user_params)   # 現在のログインしているユーザーをupdateする！
-      redirect_to root_path   # トップページへ戻る
+      redirect_to root_path
     else
-      render :edit  # ??? であれば9行目は:indexでは？
+      render :edit
     end
 
   end
@@ -20,3 +20,8 @@ class UsersController < ApplicationController
   end
 
 end
+
+
+## MEMO ##
+
+# redirect_toとrenderの違いに関しては"GoodNote Chat-Space Rails (Lesson9)に詳細あり。
