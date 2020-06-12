@@ -6,9 +6,15 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   # has_many :chats
-  # has_many :groups_users
-  # has_many :groups, through: :groups_users
+  has_many :group_users
+  has_many :groups, through: :group_users
+  validates :name, presence: true, uniqueness: true
 
-  # バリデーションを設けるには、モデルに記載する
-  validates :name , presence: true, uniqueness: true  #uniqueness => 名詞
 end
+
+
+
+## MEMO ##
+
+# Userモデルのファイル！
+# uniqueness => 名詞
