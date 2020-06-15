@@ -16,6 +16,7 @@
       color: #333333;
       font-size: 20px;
       margin-bottom: 15px;
+      text-align: left;
       }
       &__member-name {
       color: #999999;
@@ -41,6 +42,7 @@
     background-color: #fafafa;
     height: calc(100vh - 190px);
     padding: 35px 40px;
+    overflow: scroll;
     &__box {
     margin-bottom: 46px;
       &__info {

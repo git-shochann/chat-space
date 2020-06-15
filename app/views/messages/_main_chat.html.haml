@@ -2,43 +2,53 @@
   .main-chat__group-info
     .main-chat__group-info__left-box
       %h1.main-chat__group-info__left-box__title-box
-        Programming
+        = @group.name
+        -# グループのレコード1行分を持っているので、それのnameカラム。
       %ul.main-chat__group-info__left-box__member-name
-        Member : Sho
+        Member :
+        -# ↓グループに紐づくユーザーさんを配列型式で呼び出す（表示はここではないです）
+        - @group.users.each do |user|
+          = user.name
+        -# ↑表示させたいもの（配列で呼び出したユーザーの名前)
 
     .main-chat__group-info__right-box
-      = link_to "Edit", "#"
+      = link_to "Edit", edit_group_path(@group)
+      -# ()の中をどう決めるか？ メッセージコントローラーに対するビューである事を今一度確認。このパスは/groups/:id/editでもあるので、
+      -# idの情報を持たせる為にも@groupとする。
 
   .main-chat__message
-    .main-chat__message__box
-      .main-chat__message__box__info
-        %p.main-chat__message__box__info__talker
-          Sho
-        %p.main-chat__message__box__info__date
-          2020/08/25(Wed)17:43:00
-      .main-chat__message__box__comment
-        Good Morning!
-    .main-chat__message__box
-      .main-chat__message__box__info
-        %p.main-chat__message__box__info__talker
-          Sho
-        %p.main-chat__message__box__info__date
-          2020/08/25(Wed)17:45:00
-      .main-chat__message__box__comment
-        Good Night!
-
+    = render @messages
 
   .main-chat__form
-    %form.main-chat__form__new-message
+    = form_for [@group, @message], html: { class: "main-chat__form__new-message" } do |f|
       .main-chat__form__new-message__input-box
-        %input{type: "text" , placeholder: "type a message" , class: "main-chat__form__new-message__input-box__text"}
-        %label.main-chat__form__new-message__input-box__image
-          %input{type: "file" , class: "main-chat__form__new-message__input-box__image__detail"}
+        = f.text_field :content, placeholder: "Type a message", class: "main-chat__form__new-message__input-box__text"
+        = f.label :image, class: "main-chat__form__new-message__input-box__image" do
           = icon('far' , 'image')
-      %input{type: "submit" , value: "Send" , class: "main-chat__form__new-message__submit-btn"}
+          = f.file_field :image, class:"main-chat__form__new-message__input-box__image__detail"
+      = f.submit :send, class: "main-chat__form__new-message__submit-btn"
 
 
 
-// MEMO //
-// 36,37インデント揃える。Sampleの検証で見てもインデント揃ってる。
-// メインチャットの部分テンプレートのファイル！
+-# MEMO
+-# 36,37インデント揃える。Sampleの検証で見てもインデント揃ってる。
+-# メインチャットの部分テンプレートのファイル！
+
+
+-# 16行目 form_for内に関して,
+-#  @group => @group = Group.find(params[:id])
+-#  @message => @message = Message.new
+-#  ネストさせないといけないのは？ =>パスを生成する時にネストされているURIパターンが必要。
+-#  form_for @group この時の引数「@group」は、投稿されたデータを"""どこに送信すればいいのか(行き先)"""を指定するためでもある。Railsが自動的に次のパスを選択。
+
+-# 12,13行目 render @messagesに関して,
+-# もし省略しなかったら, render partial: 'message', collection: @messages となる.
+-# partialは呼び出すファイル名.
+-# collectionオプションを使用した場合、部分テンプレート内で使用する変数はオプションで指定した変数が@messagesであったらその単数形のmessageとなる
+
+
+-# なぜ:imageと2つのキーが必要なのか?
+-# submitでvalueを元々指定していたがなくても入るのはなぜなのか? value: "Send"を入れるとおかしな動きになる
+
+-# 9行目 => usersが大事.アソシエーションでhas_many :users, through: :group_usersなので,usersを指定すると配列形式で持ってくる.
+-# その配列を1つ1つ出すけど、nameカラムを指定する事でビューに表示。

@@ -1,0 +1,36 @@
+
+
+
+.main-chat__message__box
+  .main-chat__message__box__info
+    %p.main-chat__message__box__info__talker
+      = message.user.name
+    %p.main-chat__message__box__info__date
+      = message.created_at.strftime("%Y年%m月%d日 %H時%M分")
+  .main-chat__message__box__comment
+    - if message.content.present?
+      %p.main-chat__message__box__comment__detail
+        = message.content
+    = image_tag message.image.url, class:"main-chat__message__box__comment__image" if message.image.present?
+
+
+-# MEMO #-
+
+-# 主要メッセージ部分の何度も繰り返す部分テンプレートファイル!
+
+-# renderのcollectionオプションに関して,省略の書き方 => https://pikawaka.com/rails/partial_template
+-# collectionを使うと、@messagesのデータは一括でまとめて渡され、ビュー作成のメソッドは1回の実行で済む。
+
+-#  '''' strftime ''''
+-#  railsだとテーブルを作成する際のマイグレーションファイルにデフォルトでt.timestampsという記述があり、
+-#  自動でcreated_atカラムとupdated_atカラム"が"datetime型カラムとして作成される。
+-#  strftimeメソッドとは、日時データを指定したフォーマットで""文字列に変換""することができるメソッド
+-#  3.to_s をすると 文字列の"3"になるのと同じ原理。
+-#  strftimeメソッドはTimeクラスとDateクラス、DateTimeクラスのオブジェクトに使用できる!!!
+
+-# if文で条件分岐させる意味 ↓
+-# 11行目 もしcontentカラムの中に情報があったら、12行目の箱の中の13行目の処理を行う == 送ったメッセージを表示する(image_tagは別の箱なので,インデントで上手にずらしている)
+-# 11行目のif文, もし空だったらわざわざ空の箱を表示する必要性はない,表示してもエラーにはならないけど処理的に無駄になる。
+-# 14行目のif文, ifがないとimage_tagで作った空の箱が反映される
+
+-# hamlの記法を注意。html内でrubyのコードを使う<%= ~>. hamlだと= .
