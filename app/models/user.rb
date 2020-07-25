@@ -12,8 +12,11 @@ class User < ApplicationRecord
 end
 
 
-
 ## MEMO ##
 
 # Userモデルのファイル！
 # uniqueness => 名詞
+
+# クラスメソッド => そのクラス外でも使える。
+
+# インスタンスメソッド => そのクラス内でしか使えない。
