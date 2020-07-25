@@ -10,15 +10,48 @@
       = f.label :name, class: 'chat-group-form__label'
     .chat-group-form__field--right
       = f.text_field :name, class: 'chat__group_name chat-group-form__input', placeholder: 'グループ名を入力してください'
-  .chat-group-form__field.clearfix
-    / この部分はインクリメンタルサーチ（ユーザー追加の非同期化のときに使用します
+  
+    .chat-group-form__field--left
+      %label.chat-group-form__label{:for => "chat_group_チャットメンバーを追加"} チャットメンバーを追加
+    .chat-group-form__field--right
+      .chat-group-form__search.clearfix
+        %input#user-search-field.chat-group-form__input{:placeholder => "追加したいユーザー名を入力してください", :type => "text"}/
+      #user-search-result
+
+    // この部分はインクリメンタルサーチ（ユーザー追加の非同期化のときに使用
+
   .chat-group-form__field.clearfix
     .chat-group-form__field--left
       %label.chat-group-form__label{:for => "chat_group_チャットメンバー"} チャットメンバー
     .chat-group-form__field--right
-      / グループ作成機能の追加時はここにcollection_check_boxesの記述を入れてください
-      = f.collection_check_boxes :user_ids, User.all, :id, :name
-      / この部分はインクリメンタルサーチ（ユーザー追加の非同期化のときに使用します
+
+      #chat-group-users.js-add-user
+        .chat-group-user.clearfix.js-chat-member#chat-group-user-8
+          %input{ name: "group[user_ids][]", type: "hidden", value: current_user.id}
+          -# パラメーターの中身を確認すると、"group"=>{"name"=>"Group-1", "user_ids"=>["2", "1"]},
+          -# なぜこのような形になるのか確認していく。
+          -# 上記は普通にHTMLのコード。%タグ名 == <開始タグ><閉じタグ> 
+          %p.chat-group-user__name
+            = current_user.name
+          -# 現在のログインしているユーザー常に表示させる！ ※ Rubyのコード！
+
+          -# 重要!!! 上記のかたまりはチャットメンバーのなかに現在のログインしているユーザーは固定化されるので、
+          -# そのかたまりのHTMLのコードを書いている。paramsとしてDBに送る時、
+
+          -# グループ作成機能の追加時はここにcollection_check_boxesの記述を入れてください
+          -# = f.collection_check_boxes :user_ids, User.all, :id, :name
+          -# この部分はインクリメンタルサーチ（ユーザー追加の非同期化のときに使用
+
+        - group.users.each do |user|
+          - if current_user.name != user.name
+            .chat-group-user.clearfix.js-chat-member
+              %input{name: "group[user_ids][]", type: "hidden", value: user.id}
+              %p.chat-group-user__name
+                = user.name 
+              %a.user-search-remove.chat-group-user__btn.chat-group-user__btn--remove.js-remove-btn
+                削除
+          -# どういう構造と流れか確認。
+
   .chat-group-form__field.clearfix
     .chat-group-form__field--left
     .chat-group-form__field--right
@@ -27,8 +60,22 @@
 
 // MEMO //
 
--# 18行目 => user_idsがキーとなり、User.all(idカラムとnameカラム)で、その:idはバリュー!!!
+-# 31行目 => user_idsがキーとなり、User.all(idカラムとnameカラム)で、その:idはバリュー!!!
 
 -# group.errorのように変数groupの保存をしようとした時に、失敗するとgroupにエラーメッセージが格納。
 -# とは 配列の形で保存される。
 -# とは その後のeachメソッドに応用することが出来る。
+
+-# rubyタグの書き方
+-# <%= ... %>は = ...のように記述します。(画面上に表示する！)
+-# <% ... %>は - ...のように記述します。(画面上に表示しない！)
+
+-## ターミナルでのbinding.pryの詳細の画面！
+
+-# [1] pry(#<GroupsController>)> params
+-# => <ActionController::Parameters {"utf8"=>"✓", "_method"=>"patch", "authenticity_token"=>"eC+djpO4ei0y/TK/byNzbmqBKcnNzXe/aSwPXsrzlzGPdQmgLq8DBHWV57lguY77hDpkBG6AJCj57yjwBz32xA==", "group"=>{"name"=>"Group-1", "user_ids"=>["2", "1"]}, "commit"=>"更新する", "controller"=>"groups", "action"=>"update", "id"=>"1"} permitted: false>
+-# 上記に関しては''まだ''発生したパラメーター。updateアクションに送られようとしている値。
+
+-# [2] pry(#<GroupsController>)> group_params
+-# => <ActionController::Parameters {"name"=>"Group-1", "user_ids"=>["2", "1"]} permitted: true>
+-# 上記はストロングパラメーター内でDBに保存できる値を制限させている。
