@@ -20,6 +20,7 @@ class GroupsController < ApplicationController
 
   def edit
     @group = Group.find(params[:id])
+    # ここのparamsはjs側のフォームで決めている値
   end
 
   def update
@@ -37,7 +38,6 @@ class GroupsController < ApplicationController
     params.require(:group).permit(:name, user_ids: [])
     # (:groupとはgroupモデル(groupテーブル)を指定している)
     # []ってなんだっけ？
-
    end
 
 end
