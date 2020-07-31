@@ -80,7 +80,6 @@ $(function(){
 
   var reloadMessages = function(){
     var last_message_id = $(".main-chat__message__box:last").data("message-id");
-    // console.log(last_message_id); // しっかりと受け取れてるか確認。
     $.ajax({
       url: 'api/messages',
       type: 'GET',
@@ -99,8 +98,6 @@ $(function(){
       });
       $(".main-chat__message").append(insertHTML);
       $(".main-chat__message").animate({scrollTop: $(".main-chat__message")[0].scrollHeight});
-      // console.log($(".main-chat__message")[0])
-      // console.log($(".main-chat__message"))
       // メッセージをまとめている箱をanimateメソッドで動かす。何を？ => まずはスクロールさせたい。=> メッセージをまとめている箱の高さ分スクロールさせる！
       // [0]番目の指定必要？ scrollHeightメソッドで全体的な高さを取得！
     }
