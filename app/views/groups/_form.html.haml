@@ -18,7 +18,6 @@
         %input#user-search-field.chat-group-form__input{:placeholder => "追加したいユーザー名を入力してください", :type => "text"}/
       #user-search-result
 
-    // この部分はインクリメンタルサーチ（ユーザー追加の非同期化のときに使用
 
   .chat-group-form__field.clearfix
     .chat-group-form__field--left
@@ -40,17 +39,21 @@
 
           -# グループ作成機能の追加時はここにcollection_check_boxesの記述を入れてください
           -# = f.collection_check_boxes :user_ids, User.all, :id, :name
-          -# この部分はインクリメンタルサーチ（ユーザー追加の非同期化のときに使用
 
         - group.users.each do |user|
           - if current_user.name != user.name
             .chat-group-user.clearfix.js-chat-member
               %input{name: "group[user_ids][]", type: "hidden", value: user.id}
               %p.chat-group-user__name
-                = user.name 
+                = user.name
               %a.user-search-remove.chat-group-user__btn.chat-group-user__btn--remove.js-remove-btn
                 削除
-          -# どういう構造と流れか確認。
+          -# != 比較演算子 両方が等しくないときに表示。
+          -# @group == group(haml仕様)
+          -# groupsコントローラーのeditアクションの@group
+          -# 現在のユーザーは見つけてきて保存をしない(重複する為)、if文で分岐！
+          -# 現在のユーザーはユーザー一覧から、外せない。その他のユーザーは削除ボタンを持つので
+          -# しっかりとサンプルと仕様書を確認する！
 
   .chat-group-form__field.clearfix
     .chat-group-form__field--left

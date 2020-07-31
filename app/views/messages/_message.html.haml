@@ -1,7 +1,7 @@
 
 
 
-.main-chat__message__box
+.main-chat__message__box{data: {message: {id: message.id}}}
   .main-chat__message__box__info
     %p.main-chat__message__box__info__talker
       = message.user.name
@@ -34,3 +34,9 @@
 -# 14行目のif文, ifがないとimage_tagで作った空の箱が反映される
 
 -# hamlの記法を注意。html内でrubyのコードを使う<%= ~>. hamlだと= .
+
+-# %div{data: {message: {id: '1'}}}
+-# 上記の記述で、以下のようにカスタムデータ属性が反映される
+-# => <div data-message-id='1'>
+
+-# 4行目 message.idとはどこから？
