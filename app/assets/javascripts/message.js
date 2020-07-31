@@ -111,7 +111,7 @@ $(function(){
     // locationはプロパティやメソッドと組み合わせて使う。documentとする理由、画面上の情報を取得できる。
     // 正規表現は基本的には/と/で囲んだ部分で表す。/も含めたい場合、直前にバックスラッシュ(\)を付ける。\d+で1つ。
   
-    setInterval(reloadMessages, 4000);
+    setInterval(reloadMessages, 7000);
     
     }
 });
